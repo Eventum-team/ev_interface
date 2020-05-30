@@ -12,7 +12,7 @@ function requestAllTags(callback){
       return;
     }
 
-    client.AllTags(args, function(err, result) {      
+    client.AllTags(args, function(err, result) {   
       callback(result);
     });
   });

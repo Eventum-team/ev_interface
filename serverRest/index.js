@@ -1,13 +1,13 @@
+const express = require(`express`);
 const {
     getAllTags,
     getImagesByTag
   } = require("./requests/eventRequest");
 
 const {
-  portServerRest
+  portServerRest,
+  uriServerRest
 } = require ('./config');
-
-const express = require(`express`);
 
 const appRest = express();
 
@@ -20,5 +20,5 @@ appRest.get('/imagesByTag/:idTag', function (req, res) {
 });
 
 appRest.listen(portServerRest, function () {
-  console.log('Server Rest : Open in port ' + portServerRest);
+  console.log(`Server Rest : API on ${uriServerRest}`);
 });

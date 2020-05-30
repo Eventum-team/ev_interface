@@ -5,6 +5,11 @@ services:
     container_name: ev-interface
     build: .
     network_mode: "host"
+    environment:
+      - SERVER_REST_PORT=3010
+      - SERVER_SOAP_PORT=8010
+      - SERVER_2B=http://127.0.0.1:6060/ss_2b?wsdl
+      - HOST_IP=127.0.0.1
     ports:
-      - "3000:3000"
-      - "8001:8001"
+      - "3010:3010"
+      - "8010:8010"

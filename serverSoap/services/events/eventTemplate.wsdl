@@ -85,7 +85,7 @@
   <!-- SERVICE:  -->
   <wsdl:service name="ev_events">
     <wsdl:port name="functions" binding="tns:ev_events_Binding">
-      <soap:address location="http://localhost:6060/ev_events"/>
+      <soap:address location="http://localhost:8010/ev_events"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
