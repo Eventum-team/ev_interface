@@ -7,7 +7,6 @@ RUN npm install
 COPY . /ev-interface/
 
 
-EXPOSE 3000
-EXPOSE 8001
+EXPOSE 3000 8001
 
 CMD ["npm", "start"]
