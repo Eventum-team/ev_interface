@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <definitions> must be the root of the WSDL document -->
+<wsdl:definitions targetNamespace="http://www.examples.com/wsdl/MyService.wsdl" 
+  xmlns:s="http://www.w3.org/2001/XMLSchema" 
+  xmlns:tns="http://www.examples.com/wsdl/MyService.wsdl" 
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <!-- WSDL TYPES: definition of the data types that are used in the web service -->
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.examples.com/wsdl/MyService.wsdl">
+      <s:element name="AllEventsSoapRequest">
+        <s:complexType>
+          <s:sequence>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AllEventsSoapResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element maxOccurs="unbounded" name="event"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EventByIdRequest">
+        <s:sequence>
+            <s:element name = "eventId" type = "xsd:string"/>
+          </s:sequence>
+      </s:element>
+      <s:element name="EventByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element maxOccurs="unbounded" name="url" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <!-- MESSAGES: defines the data being exchanged between the service and client -->
+  <wsdl:message name="AllEventsSoapIn">
+    <wsdl:part name="parameters" element="tns:AllEventsSoapRequest"/>
+  </wsdl:message>
+  <wsdl:message name="AllEventsSoapOut">
+    <wsdl:part name="parameters" element="tns:AllEventsSoapResponse"/>
+  </wsdl:message>
+  <wsdl:message name="EventByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:EventByIdRequest"/>
+  </wsdl:message>
+  <wsdl:message name="EventByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:EventByIdResponse"/>
+  </wsdl:message>
+  <!-- PORT TYPES: defines the complete communication operation (one way/round trip) -->
+  <wsdl:portType name="ev_events_Port">
+    <!-- The operation name must be the same as the one specified in the service object -->
+    <wsdl:operation name="AllEvents">
+      <wsdl:input message="tns:AllEventsSoapIn"/>
+      <wsdl:output message="tns:AllEventsSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="EventById">
+      <wsdl:input message="tns:EventByIdSoapIn"/>
+      <wsdl:output message="tns:EventByIdSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <!-- BINDING: provides details on how a portType operation will actually be transmitted -->
+  <wsdl:binding name="ev_events_Binding" type="tns:ev_events_Port">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="AllEvents">
+      <soap:operation soapAction="AllEvents" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EventById">
+      <soap:operation soapAction="EventById" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <!-- SERVICE:  -->
+  <wsdl:service name="ev_events">
+    <wsdl:port name="functions" binding="tns:ev_events_Binding">
+      <soap:address location="http://localhost:6060/ev_events"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
